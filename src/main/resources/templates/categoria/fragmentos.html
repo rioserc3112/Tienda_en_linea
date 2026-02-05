@@ -31,7 +31,7 @@
                             <div class="modal-body">
                                 <div class='mb-3'>
                                     <label>[[#{categoria.descripcion}]]</label>
-                                    <input type="text" name='descripcion' class='form-control' required="true"/></div>
+                                    <input type="text" name='descripcion' class='form-control' size="50" required="true"/></div>
                                 <div class='mb-3'>
                                     <label>[[#{categoria.activo}]]</label>
                                     <input type="checkbox" name='activo' class='form-check-input'/></div>
@@ -130,7 +130,7 @@
                                         <div class="mb-3">
                                             <label for="descripcion">[[#{categoria.descripcion}]]</label>
                                             <input type="text" class="form-control" name="descripcion" 
-                                                   th:field="*{descripcion}" required="true"/>
+                                                   th:field="*{descripcion}" size="50" required="true"/>
                                         </div>
                                         <div class="mb-3">
                                             <label for="activo">[[#{categoria.activo}]]</label>
