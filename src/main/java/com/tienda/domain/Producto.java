@@ -10,6 +10,8 @@ import lombok.Data;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import java.math.BigDecimal;
@@ -24,7 +26,7 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
     private Integer idProducto;
-    private Integer idCategoria;
+    //private Integer idCategoria; Ahora esta dentro de objeto categoria
 
     @Column(unique = true, nullable = false, length = 50)
     @NotNull
@@ -48,4 +50,8 @@ public class Producto implements Serializable {
     private String rutaImagen;
 
     private boolean activo;
+    
+    @ManyToOne
+    @JoinColumn(name="id_categoria")
+    private Categoria categoria;
 }

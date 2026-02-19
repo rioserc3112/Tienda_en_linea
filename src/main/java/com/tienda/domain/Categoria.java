@@ -10,6 +10,8 @@ import lombok.Data;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.persistence.Column;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Data
 @Entity
@@ -31,5 +33,9 @@ public class Categoria implements Serializable {
     @Size(max = 1024)
     private String rutaImagen;
 
+    @Column(name = "activo")
     private boolean activo;
+    
+    @OneToMany(mappedBy="categoria")
+    private List<Producto> productos;
 }
