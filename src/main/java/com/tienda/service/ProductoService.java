@@ -65,4 +65,25 @@ public class ProductoService {
             throw new IllegalStateException("No se puede eliminar la producto. Tiene datos asociados.", e);
         }
     }
+    
+    //Estas 3 funciones hacen exactamente lo mismo, pero son diferentes formas de hacer consultas SQL
+    
+    //1 Se llama a la consulta derivada
+    @Transactional(readOnly = true)
+    public List<Producto> consultaDerivada(double precioInf, double precioSup) {        
+        return productoRepository.findByPrecioBetweenOrderByPrecioAsc(precioInf, precioSup);
+    }
+    
+    //2 Se llama a la consulta JPQL
+    @Transactional(readOnly = true)
+    public List<Producto> consultaJPQL(double precioInf, double precioSup) {        
+        return productoRepository.consultaJPQL(precioInf, precioSup);
+    }
+    
+    //3 Se llama a la consulta SQL
+    @Transactional(readOnly = true)
+    public List<Producto> consultaSQL(double precioInf, double precioSup) {        
+        return productoRepository.consultaSQL(precioInf, precioSup);
+    }
+    
 }

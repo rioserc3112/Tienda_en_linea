@@ -61,3 +61,54 @@
         </div>
     </div>
 </section>
+
+
+<!-- fragmento 3 Llamado a un formulario con parametros y su tarea #2 -->
+
+<section th:fragment="consultas" class="row row-cols-4 p-2">
+
+    <div th:replace="~{consultas/fragmentos :: formConsulta('primary', #{consultas.derivadas}, '/consultas/consultaDerivada')}"></div>
+    <div th:replace="~{consultas/fragmentos :: formConsulta('warning', #{consultas.jpql}, '/consultas/consultaJPQL')}"></div>
+    <div th:replace="~{consultas/fragmentos :: formConsulta('success', #{consultas.sql}, '/consultas/consultaSQL')}"></div>
+    <div class="card">
+        <h5>Su tarea #2</h5>
+    </div>
+
+</section>
+
+<div th:fragment="formConsulta(colorForm, textForm, accionForm)">
+    <form method="post"
+          th:action="@{${accionForm}}"
+          class="was-validated">
+        <div class="card p-2">
+            <div class="card-header text-center text-white "
+                 th:classappend="${ 'bg-' + colorForm}"
+                 <h5>[[${textForm}]]</h5>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="mb-3 ">
+                <label>[[#{consultas.precio.inferior}]]</label>
+                <input class="form-control"
+                       type="number" name="precioInf"
+                       th:value="${precioInf}" min="0" required/>
+            </div>            
+            <div class="mb-3 ">
+                <label>[[#{consultas.precio.superior}]]</label>
+                <input class="form-control"
+                       type="number" name="precioSup"
+                       th:value="${precioSup}" min="0" required/>
+            </div>            
+
+        </div>
+        <div class="card-body text-center">
+            <button type="submit" class="btn text-white"
+                    th:classappend="${'btn-'+colorForm}">
+                <i class='fa-solid fa-magnifying-glass'></i>
+                [[${textForm}]]
+            </button>
+
+    </div>
+
+</form>
+</div>
