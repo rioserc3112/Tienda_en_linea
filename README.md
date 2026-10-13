@@ -159,27 +159,6 @@ The sample users are `juan` (ADMIN, VENDEDOR, USER), `rebeca` (VENDEDOR, USER), 
 - **Route rules require a restart** to take effect (see above).
 - `/pruebas/**`, `/reportes/**`, `/role/**` appear in the route table but have no matching controllers.
 
-## Security: fix before publishing this repository
-
-The repository as provided contains live secrets committed in plain text. Treat all of them as compromised and rotate them:
-
-1. **Firebase service-account private key** at `src/main/resources/firebase/*.json`. Revoke the key in Google Cloud Console and issue a new one. Anyone with it can read and write your storage bucket.
-2. **Database password** in `application.properties` for the hosted MySQL instance.
-3. **Gmail address and app password** in `application.properties`, including a stray line of what appears to be an app password sitting above the mail settings. Revoke it in your Google account.
-4. **PayPal sandbox client ID and secret** inserted by `creaTablas.sql`.
-5. **Default DB user passwords** hard-coded in `creaTablas.sql`.
-
-Rotating alone is not enough: the old values stay in git history. Either rewrite history (`git filter-repo` or BFG) or publish from a fresh repository.
-
-To stop this from recurring, add to `.gitignore`:
-
-```
-src/main/resources/firebase/*.json
-src/main/resources/application-local.properties
-.env
-```
-
-Then load secrets from environment variables or an untracked `application-local.properties`, and ship a sanitized `application.properties.example` instead.
 
 ## License
 
